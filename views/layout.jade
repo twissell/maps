@@ -3,5 +3,38 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+    script(src="http://maps.googleapis.com/maps/api/js?sensor=SET_TO_TRUE_OR_FALSE")
+  body(onload="initialize()")
     block content
+    script(type="text/javascript").
+      function initialize() {
+        var twissellLatLng = new google.maps.LatLng(40.4274318, -3.6654922,20);
+        
+        var mapOptions = {
+          center: twissellLatLng,
+          zoom: 20,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+        var goldStar = {
+          path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
+          fillColor: "yellow",
+          fillOpacity: 0.8,
+          scale: 1,
+          strokeColor: "gold",
+          strokeWeight: 14
+        };
+
+        // add marker
+        var twissellMarker = new google.maps.Marker({
+          position: twissellLatLng,
+          title: "twissell house",
+          icon: goldStar
+          //map: map
+        });
+
+        twissellMarker.setMap(map);
+      }
+      
